@@ -1,0 +1,15 @@
+# Plant SOS - Python dependencies (CPU training + local Flask API)
+# Target: Python 3.12, Windows native, CPU-only training.
+
+# Training (confirmed: TensorFlow + Keras, MobileNetV2 transfer learning, 224x224).
+# 2.21.0 ships a Windows x86-64 wheel for CPython 3.12 (verified on PyPI, Mar 2026).
+# Note: no native Windows GPU wheels after TF 2.10 - fine, we train on CPU.
+tensorflow==2.21.0
+
+# Supporting libraries for data preparation and evaluation metrics.
+numpy>=2.0
+pillow>=11.0
+scikit-learn>=1.6
+
+# Local Flask API server (used in a later step to serve /analyze).
+flask>=3.1

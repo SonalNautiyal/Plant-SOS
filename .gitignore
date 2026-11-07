@@ -1,0 +1,40 @@
+# Plant SOS - things that must never be pushed to GitHub
+
+# Python virtual environment and VS Code-style env folders
+.venv/
+venv/
+env/
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+
+# Downloaded datasets (third-party images; regenerable via download script)
+data/
+dataset/
+datasets/
+
+# Dataset archives Kaggle drops when downloading at the repo root
+/*.zip
+/*.rar
+/*.7z
+
+# Trained model weights and other regenerable exports
+models/*
+*.keras
+*.h5
+*.hdf5
+*.pkl
+*.pth
+*.onnx
+*.tflite
+# ...except this tiny generated file, which the Flask API needs:
+!models/labels.json
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local secrets (future-proofing; none in use yet)
+.env

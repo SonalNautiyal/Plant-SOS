@@ -1,0 +1,388 @@
+/* Plant SOS — soft sage and yellow-green, organic shapes, light botanical line art.
+   Layout and responsive behavior live here; page behavior lives in app.js. */
+
+/* Safety net: the hidden attribute must always win over any display rule we write. */
+[hidden] {
+  display: none !important;
+}
+
+/* A small palette: soft sage page, cream cards, deep forest ink, yellow-green accents. */
+:root {
+  --page: #edf0e3;
+  --cream: #f7f5ea;
+  --card: #fdfcf6;
+  --card-green: #e7efdf;
+  --ink: #2f3a30;
+  --ink-soft: #616b5e;
+  --sage: #9ab48a;
+  --leaf: #5f8f66;
+  --forest: #3c5a40;
+  --citron: #d9d66f;
+  --citron-ink: #5f6a1e;
+  --line: #d9dcc8;
+  --line-green: #bfcdb4;
+  --track: #e2e4d5;
+  --radius-organic: 22px 9px 22px 9px;
+  --radius-soft: 18px 8px 18px 8px;
+}
+
+/* Base rules apply to all screens, starting from 320 px wide. */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0 16px 48px;
+  background-color: var(--page);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+/* Gentle botanical washes pinned to the outer corners, behind all content.
+   The center of the page stays untouched so text, upload, and results keep contrast. */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+body::before {
+  top: 0;
+  height: 420px;
+  background:
+    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20480%20420'%3E%3Cellipse%20cx='170'%20cy='150'%20rx='250'%20ry='180'%20fill='%23f2f0e0'%20opacity='0.35'/%3E%3Cellipse%20cx='150'%20cy='130'%20rx='190'%20ry='130'%20fill='%23f6f3e6'%20opacity='0.45'/%3E%3Cpath%20d='M90,240C150,200,260,210,300,270C240,320,140,310,90,240Z'%20fill='none'%20stroke='%23a8bd97'%20stroke-width='3'%20opacity='0.5'/%3E%3Cpath%20d='M100,246C160,246,240,270,292,266'%20fill='none'%20stroke='%23a8bd97'%20stroke-width='2'%20opacity='0.4'/%3E%3C/svg%3E") left top / 480px 420px no-repeat,
+    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20460%20360'%3E%3Cellipse%20cx='300'%20cy='150'%20rx='240'%20ry='175'%20fill='%23e9e7b9'%20opacity='0.3'/%3E%3Cellipse%20cx='320'%20cy='125'%20rx='170'%20ry='120'%20fill='%23ede9c4'%20opacity='0.4'/%3E%3C/svg%3E") right top / 460px 360px no-repeat;
+}
+
+body::after {
+  bottom: 0;
+  height: 480px;
+  background:
+    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20480%20460'%3E%3Cellipse%20cx='150'%20cy='320'%20rx='250'%20ry='190'%20fill='%23d5dfc5'%20opacity='0.3'/%3E%3Cellipse%20cx='140'%20cy='340'%20rx='170'%20ry='130'%20fill='%23dde4cd'%20opacity='0.45'/%3E%3Cpath%20d='M60,390C110,340,210,330,290,370C240,440,120,460,60,390Z'%20fill='none'%20stroke='%23a8bd97'%20stroke-width='3'%20opacity='0.5'/%3E%3Cpath%20d='M70,392C140,380,230,385,282,372'%20fill='none'%20stroke='%23a8bd97'%20stroke-width='2'%20opacity='0.4'/%3E%3C/svg%3E") left bottom / 480px 460px no-repeat,
+    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20520%20480'%3E%3Cellipse%20cx='380'%20cy='330'%20rx='260'%20ry='200'%20fill='%23f2f0e0'%20opacity='0.35'/%3E%3Cellipse%20cx='360'%20cy='350'%20rx='180'%20ry='135'%20fill='%23f6f3e6'%20opacity='0.45'/%3E%3Ccircle%20cx='430'%20cy='270'%20r='40'%20fill='%23e9e7b9'%20opacity='0.5'/%3E%3C/svg%3E") right bottom / 520px 480px no-repeat;
+}
+
+/* One centered column for the hero AND every section. */
+header,
+main {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* Hero card. margin-left/right auto here so the panel always stays centered
+   even though it is also the header element. */
+.hero {
+  position: relative;
+  overflow: hidden;
+  margin: 20px auto 24px;
+  padding: 30px 20px 24px;
+  text-align: center;
+  background-color: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-organic);
+  box-shadow: 0 1px 4px rgba(60, 90, 64, 0.08);
+}
+
+/* Original botanical detail: a faint outlined leaf drawn behind the hero text. */
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  width: 64px;
+  height: 100px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 96' fill='none' stroke='%238faf8b' stroke-width='2'%3E%3Cpath d='M30 6 C 10 30 10 62 30 90 C 50 62 50 30 30 6 Z'/%3E%3Cpath d='M30 12 V84'/%3E%3Cpath d='M30 34 C24 38 20 44 18 52 M30 34 C36 38 40 44 42 52 M30 58 C24 62 20 68 18 76 M30 58 C36 62 40 68 42 76'/%3E%3C/svg%3E") no-repeat center / contain;
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.hero-sprig {
+  display: block;
+  margin: 0 auto 4px;
+}
+
+h1 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--forest);
+}
+
+.hero-line {
+  margin: 8px auto 0;
+  max-width: 46ch;
+  color: var(--ink-soft);
+}
+
+h2 {
+  margin: 0 0 10px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--forest);
+}
+
+p {
+  margin: 8px 0;
+}
+
+/* Sections share margins; only some get card treatments. */
+section {
+  margin: 20px 0;
+  padding: 18px;
+}
+
+/* The upload area is the starting point: a dashed sage card with organic corners. */
+#upload-area {
+  background-color: var(--card);
+  border: 1.5px dashed var(--sage);
+  border-radius: var(--radius-organic);
+  box-shadow: 0 1px 4px rgba(60, 90, 64, 0.06);
+}
+
+#photo-input {
+  width: 100%;
+  min-height: 46px;
+  padding: 10px;
+  font-size: 1rem;
+  color: var(--ink);
+  background-color: var(--cream);
+  border: 1px solid var(--line-green);
+  border-radius: 10px 6px 10px 6px;
+  accent-color: var(--forest);
+  cursor: pointer;
+}
+
+/* Preview and status stay quiet so the photo and messages lead. */
+#preview-area,
+#status-area {
+  padding: 14px 4px;
+}
+
+/* The photo sits on a paper mat with a soft shadow. */
+#preview-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  padding: 4px;
+  background-color: #ffffff;
+  border: 1px solid var(--line-green);
+  border-radius: 10px 5px 10px 5px;
+  box-shadow: 0 2px 6px rgba(60, 90, 64, 0.12);
+}
+
+#preview-caption,
+#analyze-hint {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  word-break: break-word;
+}
+
+/* The one prominent call to action. */
+#analyze-area {
+  padding: 6px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#analyze-button {
+  width: 100%;
+  min-height: 50px;
+  padding: 12px 24px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background-color: var(--forest);
+  color: #ffffff;
+  border: none;
+  border-radius: 14px 7px 14px 7px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(60, 90, 64, 0.20);
+  transition: background-color 0.15s ease;
+}
+
+#analyze-button:hover:not(:disabled) {
+  background-color: var(--leaf);
+}
+
+#analyze-button:disabled {
+  background-color: var(--track);
+  color: var(--ink-soft);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+#remove-photo-button {
+  padding: 8px 14px;
+  min-height: 42px;
+  align-self: flex-start;
+  font-size: 0.95rem;
+  background-color: transparent;
+  color: var(--ink-soft);
+  border: 1px solid var(--line-green);
+  border-radius: 10px 5px 10px 5px;
+  cursor: pointer;
+}
+
+#remove-photo-button:hover {
+  color: var(--ink);
+  border-color: var(--sage);
+}
+
+/* Keyboard users should always see where they are. */
+#analyze-button:focus-visible,
+#photo-input:focus-visible {
+  outline: 2px solid var(--forest);
+  outline-offset: 2px;
+}
+
+#remove-photo-button:focus-visible {
+  outline: 2px solid var(--ink-soft);
+  outline-offset: 2px;
+}
+
+/* Loading spinner, unobtrusive. */
+.spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 3px solid var(--track);
+  border-top-color: var(--leaf);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* The sample banner: yellow-green accent, clearly labeled, not overwhelming. */
+#sample-banner {
+  margin: 24px 0 8px;
+  padding: 10px 14px;
+  background-color: var(--cream);
+  border: 1px solid var(--citron);
+  border-left: 4px solid var(--citron);
+  border-radius: 12px 6px 12px 6px;
+  color: var(--citron-ink);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* Results get their own calm green-tinted card with organic corners. */
+#results-area {
+  margin-top: 8px;
+  background-color: var(--card-green);
+  border: 1px solid var(--line-green);
+  border-radius: var(--radius-soft);
+  box-shadow: 0 1px 4px rgba(60, 90, 64, 0.06);
+}
+
+#result-condition {
+  font-weight: 600;
+  color: var(--forest);
+}
+
+/* Confidence bar: soft white track, leafy fill. */
+.confidence-bar {
+  width: 260px;
+  max-width: 100%;
+  height: 12px;
+  margin: 6px 0 12px;
+  background-color: #ffffff;
+  border: 1px solid var(--line-green);
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+.confidence-bar-fill {
+  width: 0%;
+  height: 100%;
+  background-color: var(--leaf);
+}
+
+/* Care tips: fresh green markers, roomy lines. */
+#result-care {
+  margin: 4px 0 14px;
+  padding-left: 24px;
+}
+
+#result-care li {
+  margin: 8px 0;
+}
+
+#result-care li::marker {
+  color: var(--leaf);
+  font-size: 1.05em;
+}
+
+/* Disclaimer reads as quiet small print, still present. */
+#results-disclaimer {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  border-top: 1px solid var(--line-green);
+  padding-top: 10px;
+  margin-top: 12px;
+}
+
+#disclaimer-area {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  max-width: 60ch;
+}
+
+/* On wider screens everything breathes a little more. */
+@media (min-width: 700px) {
+  .hero {
+    padding: 40px 28px 30px;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  #analyze-area {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  #analyze-button {
+    width: auto;
+  }
+}
+
+/* Gentle one-time entrance: quick fade with a tiny upward drift.
+   Only plays when the user has NOT asked for reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  header,
+  main {
+    animation: page-enter 0.4s ease-out both;
+  }
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
