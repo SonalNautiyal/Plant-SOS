@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaf Analyzer - Plant SOS</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html">
+      <svg class="brand-leaf" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+        <path d="M12 3 C 6 8 5 14 12 21 C 19 14 18 8 12 3 Z" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M12 6 V 19" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span>Plant SOS</span>
+    </a>
+    <nav class="topbar-nav">
+      <a class="topbar-link" href="index.html">Home</a>
+    </nav>
+  </header>
+
+  <main class="analyzer">
+    <section class="pagehead">
+      <svg class="sprig sway" viewBox="0 0 140 70" width="110" height="55" aria-hidden="true" focusable="false">
+        <path d="M12 58 C 45 52 80 38 122 12" fill="none" stroke="#2f5d3a" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M52 44 C 34 26 44 10 66 8 C 74 26 66 42 52 44 Z" fill="var(--card)" stroke="#3c6b47" stroke-width="2.5" stroke-linejoin="round"/>
+        <path d="M55 40 C 57 27 60 16 63 11" fill="none" stroke="#3c6b47" stroke-width="1.5"/>
+        <path d="M86 24 C 84 40 96 52 116 52 C 118 34 106 22 86 24 Z" fill="#e9c94c" stroke="#8a8f3f" stroke-width="2" stroke-linejoin="round"/>
+      </svg>
+      <h1>Leaf Analyzer</h1>
+      <p class="pagehead-line">Choose a tomato leaf photo and Plant SOS will estimate its condition - always as an estimate, never a diagnosis.</p>
+    </section>
+
+    <!-- 1. Upload area -->
+    <section id="upload-area">
+      <h2>Choose a leaf photo</h2>
+      <input type="file" id="photo-input" accept=".jpg,.jpeg,.png">
+    </section>
+
+    <!-- 2. Preview area -->
+    <section id="preview-area">
+      <h2>Preview</h2>
+      <img id="preview-image" alt="Selected leaf photo preview" hidden>
+      <p id="preview-caption" hidden></p>
+      <button type="button" id="remove-photo-button" hidden>Remove photo</button>
+    </section>
+
+    <!-- 3. Analyze button -->
+    <section id="analyze-area">
+      <button type="button" id="analyze-button" disabled>Analyze Leaf</button>
+      <span id="analyze-hint">Choose a valid photo first</span>
+    </section>
+
+    <!-- 4. Status area -->
+    <section id="status-area">
+      <h2>Status</h2>
+      <p id="status-message"></p>
+      <span id="loading-spinner" class="spinner" hidden></span>
+    </section>
+
+    <!-- Sample banner shown above the results until the real API replaces it. -->
+    <p id="sample-banner" class="sample-banner" hidden>
+      SAMPLE RESULT - for layout testing only. Not a real analysis.
+    </p>
+
+    <!-- 5. Results area -->
+    <section id="results-area" hidden>
+      <h2>Results</h2>
+      <p>Possible condition: <span id="result-condition">---</span></p>
+      <p>Confidence: <span id="result-confidence">---</span></p>
+      <div class="confidence-bar">
+        <div id="confidence-bar-fill" class="confidence-bar-fill"></div>
+      </div>
+      <p>Care suggestions:</p>
+      <ul id="result-care">
+        <li>---</li>
+      </ul>
+      <p id="results-disclaimer">
+        This result is an estimate and may be wrong. It is not a diagnosis.
+        For serious problems, ask a plant specialist.
+      </p>
+    </section>
+
+    <!-- 6. Disclaimer area -->
+    <section id="disclaimer-area">
+      <h2>Disclaimer</h2>
+      <p>This result is only an estimate, not a diagnosis.
+         For an accurate diagnosis, please consult a plant expert.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Plant SOS results are estimates, not diagnoses. The analyzer currently supports tomato leaf conditions.</p>
+  </footer>
+</body>
+</html>

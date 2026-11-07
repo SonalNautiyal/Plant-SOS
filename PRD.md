@@ -63,6 +63,10 @@ These are the primary features that will be built for the first working version:
 - Each supported condition will display 2 to 3 easy, practical steps in plain language (e.g., *"Snip off badly damaged lower leaves with clean scissors"*, *"Water near the roots, not on the leaves"*).
 - The advice will focus on safe, gentle actions rather than dangerous chemical sprays.
 
+### 4. Website pages (Version 1 structure)
+- **Landing page (`frontend/index.html`):** the first page visitors see. It shows a welcoming hero with the Plant SOS name, a short tagline, and an Explore button that scrolls down to three feature cards: **Analyze a Leaf** (available; opens `analyze.html`), **Plant Rescue Tracker** ("Coming soon"), and **Plant Waste Reuse Guide** ("Coming soon"). The two Coming-soon cards are labels only; they do not link anywhere or open unfinished pages.
+- **Leaf analyzer page (`frontend/analyze.html`):** where the Version 1 analysis flow happens (photo upload, preview, analysis, results). It links back to the landing page and shares the same visual style.
+
 ---
 
 ## 6. Future Features (To Build Later)
@@ -94,11 +98,12 @@ These features are planned for future versions after the core features work reli
 
 Here is how a person will interact with the website:
 
-1. **Open the Website:** The user visits the Plant SOS web page in their browser.
-2. **Choose a Photo:** The user clicks the upload button and selects a photo of their plant leaf.
-3. **Check the Preview:** The website displays the selected photo immediately so the user can verify it is clear and right side up.
-4. **Click "Analyze Leaf":** The user clicks the button. A simple loading message appears while the Python model processes the image.
-5. **Read the Results:** The page displays:
+1. **Open the Website:** The user visits the Plant SOS landing page.
+2. **Open the Analyzer:** The user selects the "Analyze a Leaf" feature card, which opens the analyzer page.
+3. **Choose a Photo:** The user clicks the upload button and selects a photo of their plant leaf.
+4. **Check the Preview:** The website displays the selected photo immediately so the user can verify it is clear and right side up.
+5. **Click "Analyze Leaf":** The user clicks the button. A simple loading message appears while the Python model processes the image.
+6. **Read the Results:** The page displays:
    - What the model thinks the condition is.
    - The confidence score.
    - The disclaimer reminding them it is an estimate.
@@ -109,7 +114,7 @@ Here is how a person will interact with the website:
 ## 9. Project Scope: What is Included and What is Left Out
 
 ### What We Will Build First (In-Scope for Version 1):
-- A single-page, responsive website (HTML, CSS, JavaScript).
+- A two-page experience - an inviting landing page plus a focused leaf analyzer page - responsive (HTML, CSS, JavaScript).
 - A photo upload box with an instant image preview.
 - A genuine Python machine learning model supporting a small, practical set of leaf conditions (e.g., 3 to 5 conditions).
 - A simple local connection between the website and Python.

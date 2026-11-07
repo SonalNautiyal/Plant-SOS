@@ -1,39 +1,43 @@
-/* Plant SOS — soft sage and yellow-green, organic shapes, light botanical line art.
-   Layout and responsive behavior live here; page behavior lives in app.js. */
+/* Plant SOS — vivid, friendly botanical design shared by the landing page
+   and the analyzer page. Layout and responsive behavior live here;
+   page behavior lives in app.js. */
 
 /* Safety net: the hidden attribute must always win over any display rule we write. */
 [hidden] {
   display: none !important;
 }
 
-/* A small palette: soft sage page, cream cards, deep forest ink, yellow-green accents. */
+/* Coordinated palette: rich greens, soft sage, warm cream, sunny-yellow accent. */
 :root {
-  --page: #edf0e3;
-  --cream: #f7f5ea;
-  --card: #fdfcf6;
+  --page: #f3efdf;
+  --card: #fdfbf4;
+  --cream: #f7f3e4;
   --card-green: #e7efdf;
-  --ink: #2f3a30;
-  --ink-soft: #616b5e;
+  --ink: #233126;
+  --ink-soft: #5d6659;
   --sage: #9ab48a;
-  --leaf: #5f8f66;
-  --forest: #3c5a40;
-  --citron: #d9d66f;
-  --citron-ink: #5f6a1e;
-  --line: #d9dcc8;
+  --sage-soft: #dce5cd;
+  --leaf: #4f8a5d;
+  --forest: #2f5d3a;
+  --forest-deep: #1f4028;
+  --citron: #e9c94c;
+  --citron-ink: #5f5a10;
+  --line: #ddd8c6;
   --line-green: #bfcdb4;
-  --track: #e2e4d5;
-  --radius-organic: 22px 9px 22px 9px;
+  --track: #e4e4d3;
+  --radius-organic: 24px 10px 24px 10px;
   --radius-soft: 18px 8px 18px 8px;
 }
 
-/* Base rules apply to all screens, starting from 320 px wide. */
+/* ============ Base (both pages) ============ */
+
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  padding: 0 16px 48px;
+  padding: 0 16px;
   background-color: var(--page);
   color: var(--ink);
   font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
@@ -42,8 +46,21 @@ body {
   overflow-wrap: anywhere;
 }
 
+h1, h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  color: var(--forest);
+}
+
+p {
+  margin: 8px 0;
+}
+
+a {
+  color: var(--forest);
+}
+
 /* Gentle botanical washes pinned to the outer corners, behind all content.
-   The center of the page stays untouched so text, upload, and results keep contrast. */
+   Shared by the landing page and the analyzer page. The center stays calm. */
 body::before,
 body::after {
   content: "";
@@ -58,95 +75,375 @@ body::before {
   top: 0;
   height: 420px;
   background:
-    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20480%20420'%3E%3Cellipse%20cx='170'%20cy='150'%20rx='250'%20ry='180'%20fill='%23f2f0e0'%20opacity='0.35'/%3E%3Cellipse%20cx='150'%20cy='130'%20rx='190'%20ry='130'%20fill='%23f6f3e6'%20opacity='0.45'/%3E%3Cpath%20d='M90,240C150,200,260,210,300,270C240,320,140,310,90,240Z'%20fill='none'%20stroke='%23a8bd97'%20stroke-width='3'%20opacity='0.5'/%3E%3Cpath%20d='M100,246C160,246,240,270,292,266'%20fill='none'%20stroke='%23a8bd97'%20stroke-width='2'%20opacity='0.4'/%3E%3C/svg%3E") left top / 480px 420px no-repeat,
-    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20460%20360'%3E%3Cellipse%20cx='300'%20cy='150'%20rx='240'%20ry='175'%20fill='%23e9e7b9'%20opacity='0.3'/%3E%3Cellipse%20cx='320'%20cy='125'%20rx='170'%20ry='120'%20fill='%23ede9c4'%20opacity='0.4'/%3E%3C/svg%3E") right top / 460px 360px no-repeat;
+    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20480%20420'%3E%3Cellipse%20cx='170'%20cy='150'%20rx='250'%20ry='180'%20fill='%23f0edda'%20opacity='0.4'/%3E%3Cellipse%20cx='150'%20cy='130'%20rx='190'%20ry='130'%20fill='%23f6f3e6'%20opacity='0.5'/%3E%3Cpath%20d='M90,240C150,200,260,210,300,270C240,320,140,310,90,240Z'%20fill='none'%20stroke='%23a8bd97'%20stroke-width='3'%20opacity='0.5'/%3E%3Cpath%20d='M100,246C160,246,240,270,292,266'%20fill='none'%20stroke='%23a8bd97'%20stroke-width='2'%20opacity='0.4'/%3E%3C/svg%3E") left top / 480px 420px no-repeat,
+    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20460%20360'%3E%3Cellipse%20cx='300'%20cy='150'%20rx='240'%20ry='175'%20fill='%23e3df9e'%20opacity='0.35'/%3E%3Cellipse%20cx='320'%20cy='125'%20rx='170'%20ry='120'%20fill='%23ece7bc'%20opacity='0.45'/%3E%3C/svg%3E") right top / 460px 360px no-repeat;
 }
 
 body::after {
   bottom: 0;
   height: 480px;
   background:
-    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20480%20460'%3E%3Cellipse%20cx='150'%20cy='320'%20rx='250'%20ry='190'%20fill='%23d5dfc5'%20opacity='0.3'/%3E%3Cellipse%20cx='140'%20cy='340'%20rx='170'%20ry='130'%20fill='%23dde4cd'%20opacity='0.45'/%3E%3Cpath%20d='M60,390C110,340,210,330,290,370C240,440,120,460,60,390Z'%20fill='none'%20stroke='%23a8bd97'%20stroke-width='3'%20opacity='0.5'/%3E%3Cpath%20d='M70,392C140,380,230,385,282,372'%20fill='none'%20stroke='%23a8bd97'%20stroke-width='2'%20opacity='0.4'/%3E%3C/svg%3E") left bottom / 480px 460px no-repeat,
-    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20520%20480'%3E%3Cellipse%20cx='380'%20cy='330'%20rx='260'%20ry='200'%20fill='%23f2f0e0'%20opacity='0.35'/%3E%3Cellipse%20cx='360'%20cy='350'%20rx='180'%20ry='135'%20fill='%23f6f3e6'%20opacity='0.45'/%3E%3Ccircle%20cx='430'%20cy='270'%20r='40'%20fill='%23e9e7b9'%20opacity='0.5'/%3E%3C/svg%3E") right bottom / 520px 480px no-repeat;
+    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20480%20460'%3E%3Cellipse%20cx='150'%20cy='320'%20rx='250'%20ry='190'%20fill='%23d3dfc0'%20opacity='0.35'/%3E%3Cellipse%20cx='140'%20cy='340'%20rx='170'%20ry='130'%20fill='%23dde4cd'%20opacity='0.5'/%3E%3Cpath%20d='M60,390C110,340,210,330,290,370C240,440,120,460,60,390Z'%20fill='none'%20stroke='%23a8bd97'%20stroke-width='3'%20opacity='0.5'/%3E%3Cpath%20d='M70,392C140,380,230,385,282,372'%20fill='none'%20stroke='%23a8bd97'%20stroke-width='2'%20opacity='0.4'/%3E%3C/svg%3E") left bottom / 480px 460px no-repeat,
+    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20520%20480'%3E%3Cellipse%20cx='380'%20cy='330'%20rx='260'%20ry='200'%20fill='%23f0edda'%20opacity='0.4'/%3E%3Cellipse%20cx='360'%20cy='350'%20rx='180'%20ry='135'%20fill='%23f6f3e6'%20opacity='0.5'/%3E%3Ccircle%20cx='430'%20cy='270'%20r='40'%20fill='%23e9c94c'%20opacity='0.35'/%3E%3C/svg%3E") right bottom / 520px 480px no-repeat;
 }
 
-/* One centered column for the hero AND every section. */
-header,
-main {
-  max-width: 640px;
+/* ============ Top bar (both pages) ============ */
+
+.topbar {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  max-width: 900px;
   margin: 0 auto;
+  padding: 14px 4px;
 }
 
-/* Hero card. margin-left/right auto here so the panel always stays centered
-   even though it is also the header element. */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: var(--forest);
+  text-decoration: none;
+}
+
+.brand-leaf {
+  color: var(--leaf);
+}
+
+.topbar-link {
+  color: var(--forest);
+  font-weight: 600;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 10px 5px 10px 5px;
+}
+
+.topbar-link:hover {
+  background-color: var(--sage-soft);
+}
+
+.topbar-link:focus-visible {
+  outline: 2px solid var(--forest);
+  outline-offset: 2px;
+}
+
+/* ============ Landing page: hero ============ */
+
 .hero {
   position: relative;
-  overflow: hidden;
-  margin: 20px auto 24px;
-  padding: 30px 20px 24px;
+  max-width: 900px;
+  margin: 0 auto 48px;
+  min-height: 86svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  background-color: var(--cream);
+  padding: 40px 20px 64px;
+  background-color: #fbf8ec;
   border: 1px solid var(--line);
   border-radius: var(--radius-organic);
-  box-shadow: 0 1px 4px rgba(60, 90, 64, 0.08);
+  overflow: hidden;
+  box-shadow: 0 3px 12px rgba(31, 64, 40, 0.09);
 }
 
-/* Original botanical detail: a faint outlined leaf drawn behind the hero text. */
-.hero::after {
-  content: "";
+/* Layered organic shapes: soft blobs plus CSS leaf silhouettes. */
+.hero-decor > * {
   position: absolute;
-  top: 8px;
-  right: 10px;
-  width: 64px;
-  height: 100px;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 96' fill='none' stroke='%238faf8b' stroke-width='2'%3E%3Cpath d='M30 6 C 10 30 10 62 30 90 C 50 62 50 30 30 6 Z'/%3E%3Cpath d='M30 12 V84'/%3E%3Cpath d='M30 34 C24 38 20 44 18 52 M30 34 C36 38 40 44 42 52 M30 58 C24 62 20 68 18 76 M30 58 C36 62 40 68 42 76'/%3E%3C/svg%3E") no-repeat center / contain;
-  opacity: 0.45;
   pointer-events: none;
 }
 
-.hero-sprig {
+.blob {
+  border-radius: 50%;
+}
+
+.blob-a {
+  top: -130px;
+  left: -120px;
+  width: 320px;
+  height: 320px;
+  background-color: var(--sage-soft);
+  opacity: 0.65;
+}
+
+.blob-b {
+  bottom: -150px;
+  right: -110px;
+  width: 380px;
+  height: 380px;
+  background-color: var(--sage-soft);
+  opacity: 0.5;
+}
+
+.blob-c {
+  top: 60px;
+  right: -60px;
+  width: 160px;
+  height: 160px;
+  background-color: #ece7bc;
+  opacity: 0.55;
+}
+
+.leaf-shape {
+  border-radius: 2px 60% 2px 60%;
+  height: 110px;
+  width: 62px;
+  opacity: 0.5;
+}
+
+.leaf-a {
+  top: 90px;
+  left: 40px;
+  background-color: var(--sage);
+  transform: rotate(-18deg);
+  transform-origin: bottom center;
+}
+
+.leaf-b {
+  bottom: 70px;
+  left: 14%;
+  background-color: var(--sage);
+  height: 80px;
+  width: 46px;
+  opacity: 0.4;
+  transform: rotate(28deg);
+  transform-origin: bottom center;
+}
+
+.leaf-c {
+  bottom: 60px;
+  right: 10%;
+  background-color: #cfd9b2;
+  height: 96px;
+  width: 54px;
+  opacity: 0.45;
+  transform: rotate(-26deg);
+  transform-origin: bottom center;
+}
+
+.sprig {
   display: block;
   margin: 0 auto 4px;
 }
 
-h1 {
-  margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 2rem;
-  font-weight: 600;
-  color: var(--forest);
+/* The landing hero's botanical illustration: a gentle accent above the title.
+   Bottom margin tuned so the sprig connects to the title without crowding it. */
+.hero-sprig {
+  width: clamp(190px, 27vw, 250px);
+  height: auto;
+  margin: 0 auto 10px;
 }
 
-.hero-line {
-  margin: 8px auto 0;
+.hero-inner {
+  position: relative;
   max-width: 46ch;
-  color: var(--ink-soft);
+  padding: 0 8px;
 }
 
-h2 {
-  margin: 0 0 10px;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.1rem;
+.hero-title {
+  margin: 4px 0;
+  font-size: clamp(2.7rem, 7.5vw, 3.7rem);
   font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--forest-deep);
+}
+
+.hero-tagline {
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+}
+
+/* Primary call to action (Explore on the landing, Analyze Leaf on the analyzer). */
+.btn {
+  display: inline-block;
+  margin-top: 18px;
+  min-height: 48px;
+  padding: 12px 30px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background-color: var(--forest);
+  color: #ffffff;
+  border: none;
+  border-radius: 14px 7px 14px 7px;
+  box-shadow: 0 2px 6px rgba(31, 64, 40, 0.18);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.15s ease;
+}
+
+.btn:hover {
+  background-color: var(--leaf);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--forest-deep);
+  outline-offset: 2px;
+}
+
+.hero-hint {
+  position: absolute;
+  bottom: 14px;
+  left: 0;
+  right: 0;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+}
+
+.hero-hint-arrow {
+  display: inline-block;
+  animation: dip 2.2s ease-in-out infinite;
+}
+
+/* ============ Landing page: feature cards ============ */
+
+main {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.features {
+  padding: 40px 8px 8px;
+  text-align: center;
+}
+
+.features h2 {
+  margin: 0 0 24px;
+  font-size: 1.7rem;
+}
+
+/* Citron echo under the section heading, mirroring the hero flourish. */
+.features h2::after {
+  content: "";
+  display: block;
+  width: 66px;
+  height: 6px;
+  margin: 10px auto 0;
+  border-radius: 999px;
+  background-color: var(--citron);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  text-align: left;
+}
+
+.card {
+  display: block;
+  padding: 22px 20px;
+  background-color: var(--card);
+  border: 1px solid var(--line-green);
+  border-radius: var(--radius-soft);
+  box-shadow: 0 1px 4px rgba(31, 64, 40, 0.07);
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.card h3 {
+  margin: 10px 0 6px;
+  font-family: Georgia, "Times New Roman", serif;
   color: var(--forest);
 }
 
-p {
-  margin: 8px 0;
+.card p {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
 }
 
-/* Sections share margins; only some get card treatments. */
+.card-icon {
+  color: var(--leaf);
+}
+
+/* The one live card invites a click: green-tinted, thicker border, filled action. */
+.card-live {
+  background-color: var(--card-green);
+  border: 2px solid var(--leaf);
+}
+
+.card-live .card-icon {
+  color: var(--forest);
+}
+
+.card-cta {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 9px 18px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: var(--forest);
+  border-radius: 12px 6px 12px 6px;
+  transition: background-color 0.15s ease;
+}
+
+/* A green pill mirrors the yellow "Coming soon" pills for instant contrast.
+   Scoped to .card so it beats the generic .badge rule regardless of order. */
+.card .badge-live {
+  background-color: var(--leaf);
+  color: #ffffff;
+  margin-top: 14px;
+}
+
+/* Future features are clearly labeled and never look active. */
+.badge {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 4px 12px;
+  background-color: var(--citron);
+  color: var(--citron-ink);
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 999px;
+}
+
+.card-soon {
+  border-style: solid;
+  border-color: var(--line);
+  box-shadow: none;
+}
+
+/* ============ Analyzer page ============ */
+
+.analyzer {
+  max-width: 640px;
+  margin: 0 auto 24px;
+}
+
+.pagehead {
+  text-align: center;
+  padding: 16px 8px 6px;
+  margin-bottom: 16px;
+}
+
+.pagehead h1 {
+  font-size: 2rem;
+  margin: 4px 0;
+}
+
+.pagehead-line {
+  color: var(--ink-soft);
+  max-width: 48ch;
+  margin: 6px auto 0;
+}
+
 section {
   margin: 20px 0;
   padding: 18px;
 }
 
-/* The upload area is the starting point: a dashed sage card with organic corners. */
 #upload-area {
   background-color: var(--card);
   border: 1.5px dashed var(--sage);
   border-radius: var(--radius-organic);
-  box-shadow: 0 1px 4px rgba(60, 90, 64, 0.06);
+  box-shadow: 0 1px 4px rgba(31, 64, 40, 0.06);
 }
 
 #photo-input {
@@ -162,13 +459,11 @@ section {
   cursor: pointer;
 }
 
-/* Preview and status stay quiet so the photo and messages lead. */
 #preview-area,
 #status-area {
   padding: 14px 4px;
 }
 
-/* The photo sits on a paper mat with a soft shadow. */
 #preview-image {
   display: block;
   max-width: 100%;
@@ -177,7 +472,7 @@ section {
   background-color: #ffffff;
   border: 1px solid var(--line-green);
   border-radius: 10px 5px 10px 5px;
-  box-shadow: 0 2px 6px rgba(60, 90, 64, 0.12);
+  box-shadow: 0 2px 6px rgba(31, 64, 40, 0.12);
 }
 
 #preview-caption,
@@ -187,7 +482,6 @@ section {
   word-break: break-word;
 }
 
-/* The one prominent call to action. */
 #analyze-area {
   padding: 6px 0;
   display: flex;
@@ -207,7 +501,7 @@ section {
   border: none;
   border-radius: 14px 7px 14px 7px;
   cursor: pointer;
-  box-shadow: 0 2px 5px rgba(60, 90, 64, 0.20);
+  box-shadow: 0 2px 5px rgba(31, 64, 40, 0.20);
   transition: background-color 0.15s ease;
 }
 
@@ -239,14 +533,15 @@ section {
   border-color: var(--sage);
 }
 
-/* Keyboard users should always see where they are. */
 #analyze-button:focus-visible,
 #photo-input:focus-visible {
   outline: 2px solid var(--forest);
   outline-offset: 2px;
 }
 
-#remove-photo-button:focus-visible {
+#remove-photo-button:focus-visible,
+.topbar-link:focus-visible,
+.card-live:focus-visible {
   outline: 2px solid var(--ink-soft);
   outline-offset: 2px;
 }
@@ -269,7 +564,7 @@ section {
   }
 }
 
-/* The sample banner: yellow-green accent, clearly labeled, not overwhelming. */
+/* The sample banner: sunny yellow, clearly labeled, not overwhelming. */
 #sample-banner {
   margin: 24px 0 8px;
   padding: 10px 14px;
@@ -283,13 +578,12 @@ section {
   letter-spacing: 0.02em;
 }
 
-/* Results get their own calm green-tinted card with organic corners. */
 #results-area {
   margin-top: 8px;
   background-color: var(--card-green);
   border: 1px solid var(--line-green);
   border-radius: var(--radius-soft);
-  box-shadow: 0 1px 4px rgba(60, 90, 64, 0.06);
+  box-shadow: 0 1px 4px rgba(31, 64, 40, 0.06);
 }
 
 #result-condition {
@@ -297,7 +591,6 @@ section {
   color: var(--forest);
 }
 
-/* Confidence bar: soft white track, leafy fill. */
 .confidence-bar {
   width: 260px;
   max-width: 100%;
@@ -315,7 +608,6 @@ section {
   background-color: var(--leaf);
 }
 
-/* Care tips: fresh green markers, roomy lines. */
 #result-care {
   margin: 4px 0 14px;
   padding-left: 24px;
@@ -330,7 +622,6 @@ section {
   font-size: 1.05em;
 }
 
-/* Disclaimer reads as quiet small print, still present. */
 #results-disclaimer {
   color: var(--ink-soft);
   font-size: 0.9rem;
@@ -345,13 +636,117 @@ section {
   max-width: 60ch;
 }
 
-/* On wider screens everything breathes a little more. */
-@media (min-width: 700px) {
-  .hero {
-    padding: 40px 28px 30px;
+.site-footer {
+  max-width: 640px;
+  margin: 8px auto 28px;
+  padding: 12px 8px;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+  text-align: center;
+  border-top: 1px solid var(--line);
+}
+
+/* ============ Motion: brief, smooth, non-blocking, motion-aware ============ */
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
   }
 
-  h1 {
+  /* One-time entrance on both pages: quick fade with a small upward drift. */
+  .hero-title,
+  .hero-tagline,
+  .hero .btn,
+  .pagehead h1,
+  .pagehead-line {
+    animation: fade-up 0.45s ease-out both;
+  }
+
+  .hero-tagline, .pagehead h1 {
+    animation-delay: 0.1s;
+  }
+
+  .hero .btn, .pagehead-line {
+    animation-delay: 0.2s;
+  }
+
+  .features .card {
+    animation: fade-up 0.45s ease-out both;
+  }
+
+  .features .card:nth-child(2) {
+    animation-delay: 0.12s;
+  }
+
+  .features .card:nth-child(3) {
+    animation-delay: 0.24s;
+  }
+
+  /* Gentle leaf sway; decorative only, never moves text or controls. */
+  .sway {
+    animation: sway 7s ease-in-out infinite alternate;
+    transform-origin: bottom center;
+  }
+
+  .leaf-shape {
+    animation: sway 9s ease-in-out infinite alternate;
+  }
+
+  .leaf-b {
+    animation-duration: 11s;
+  }
+
+  .leaf-c {
+    animation-duration: 10s;
+  }
+
+  @keyframes sway {
+    from {
+      transform: rotate(-2.5deg) var(--facing, none) translateY(0);
+    }
+    to {
+      transform: rotate(2.5deg) var(--facing, none) translateY(0);
+    }
+  }
+
+  .leaf-a { --facing: rotate(-18deg); }
+  .leaf-b { --facing: rotate(28deg) scale(0.73); }
+  .leaf-c { --facing: rotate(-26deg) scale(0.87); }
+
+  /* Scroll hint dip is tiny and slow on purpose. */
+  @keyframes dip {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(3px);
+    }
+  }
+
+  /* Small hover lift only for the live card. */
+  .card-live:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(31, 64, 40, 0.12);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+}
+
+/* ============ Wider screens breathe a little more ============ */
+
+@media (min-width: 700px) {
+  .topbar {
+    padding: 16px 8px;
+  }
+
+  .hero {
+    min-height: 88svh;
+  }
+
+  .hero-tagline {
+    font-size: 1.15rem;
+  }
+
+  .pagehead h1 {
     font-size: 2.2rem;
   }
 
@@ -363,26 +758,5 @@ section {
 
   #analyze-button {
     width: auto;
-  }
-}
-
-/* Gentle one-time entrance: quick fade with a tiny upward drift.
-   Only plays when the user has NOT asked for reduced motion. */
-@media (prefers-reduced-motion: no-preference) {
-  header,
-  main {
-    animation: page-enter 0.4s ease-out both;
-  }
-}
-
-@keyframes page-enter {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-
-  to {
-    opacity: 1;
-    transform: none;
   }
 }
